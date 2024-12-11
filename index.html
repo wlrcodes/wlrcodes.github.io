@@ -18,6 +18,8 @@
     <textarea id="outputText" rows="6" readonly></textarea>
 
     <button id="suggestButton">Suggestions</button>
+    <button id="viewSuggestionsButton">View Submitted Suggestions</button>
+
     <div id="suggestionBox" class="modal hidden">
       <h2>Suggest a Word</h2>
       <label for="suggestWord">Word:</label>
@@ -28,9 +30,15 @@
       <button id="closeSuggestionBox">Close</button>
     </div>
 
-    <div id="suggestionList" class="suggestions">
+    <div id="submittedSuggestionsModal" class="modal hidden">
       <h2>Submitted Suggestions</h2>
       <ul id="submittedSuggestions"></ul>
+      <button id="closeSuggestionsModal">Close</button>
+    </div>
+
+    <div>
+      <h2>Submitted Suggestions (Permanent)</h2>
+      <ul id="permanentSuggestions"></ul>
     </div>
   </div>
   <script src="script.js"></script>
