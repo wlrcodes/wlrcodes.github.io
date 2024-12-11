@@ -80,6 +80,17 @@ function brainrotTranslate(text) {
     "savanna": "Among Us Fingers",
     "kate": "Brendan's wife",
     "mags": "swag mags",
+    "karnati": "K",
+    "shayaan": "Shybaby",
+    "Kate": "Shayaans slave",
+    "Saxon": "retard",
+    "jamian": "Williams kitten",
+    "Masturbating for a long period of time": "Gooning",
+    "Abusing ones self until you are about to ejaculate but before you ejaculate you holt to maintain the dopamine inside your body": "gooning",
+    
+    
+    
+    
   };
 
    return text
