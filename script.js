@@ -92,90 +92,14 @@ const wordMap = {
     "Henry": "Golf bruzz",
 };
 
-// Function to render suggestions in permanent list
+// Render the suggestions in the modal or view window
 function renderSuggestions() {
   const suggestions = JSON.parse(localStorage.getItem("suggestions")) || [];
   const permanentList = document.getElementById("permanentSuggestions");
-  permanentList.innerHTML = ""; // Clear current list
-  suggestions.forEach(({ word, translation }) => {
-    permanentList.innerHTML += `<li>${word} > ${translation}</li>`;
-  });
+  if (permanentList) permanentList.innerHTML = ""; // Clear current list
 }
 
-// Function to open the suggestion input window
-document.getElementById("suggestButton").addEventListener("click", () => {
-  const suggestionWindow = window.open(
-    "",
-    "SuggestionWindow",
-    "width=400,height=400,resizable,scrollbars"
-  );
-
-  suggestionWindow.document.write(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Submit Suggestion</title>
-      <style>
-        body {
-          font-family: Arial, sans-serif;
-          background-color: #282a36;
-          color: #ffffff;
-          margin: 0;
-          padding: 20px;
-          text-align: center;
-        }
-        input, button {
-          margin: 10px 0;
-          padding: 10px;
-          font-size: 16px;
-          border-radius: 5px;
-          border: none;
-        }
-        input {
-          width: 80%;
-        }
-        button {
-          background-color: #e94560;
-          color: white;
-          cursor: pointer;
-        }
-        button:hover {
-          background-color: #d83450;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>Submit a Suggestion</h1>
-      <label for="suggestWord">Word:</label><br>
-      <input type="text" id="suggestWord" placeholder="Enter a word"><br>
-      <label for="suggestTranslation">Translation:</label><br>
-      <input type="text" id="suggestTranslation" placeholder="Enter a translation"><br>
-      <button id="submitSuggestion">Submit</button>
-      <button onclick="window.close()">Close</button>
-      <script>
-        document.getElementById("submitSuggestion").addEventListener("click", () => {
-          const suggestWord = document.getElementById("suggestWord").value;
-          const suggestTranslation = document.getElementById("suggestTranslation").value;
-          if (suggestWord && suggestTranslation) {
-            const suggestions = JSON.parse(localStorage.getItem("suggestions")) || [];
-            suggestions.push({ word: suggestWord, translation: suggestTranslation });
-            localStorage.setItem("suggestions", JSON.stringify(suggestions));
-            alert("Suggestion submitted successfully!");
-            window.opener.renderSuggestions();
-            window.close();
-          } else {
-            alert("Please fill out both fields.");
-          }
-        });
-      </script>
-    </body>
-    </html>
-  `);
-});
-
-// Function to open the "View Submitted Suggestions" window
+// Open a new window to view submitted suggestions
 document.getElementById("viewSuggestionsButton").addEventListener("click", () => {
   const viewWindow = window.open(
     "",
@@ -234,8 +158,7 @@ document.getElementById("viewSuggestionsButton").addEventListener("click", () =>
   `);
 });
 
-// Render suggestions on page load
-renderSuggestions();
-
-
-
+// Ensure the suggestions list is cleared on load
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("permanentSuggestions").innerHTML = "";
+});
