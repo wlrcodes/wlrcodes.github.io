@@ -82,19 +82,14 @@ function brainrotTranslate(text) {
     "mags": "swag mags",
   };
 
-  // Match and replace multi-word phrases first
-  const sortedKeys = Object.keys(wordMap).sort((a, b) => b.length - a.length);
-
-  let output = text;
-  sortedKeys.forEach((key) => {
-    // Create a global case-insensitive regex to match the phrase
-    const regex = new RegExp(`\\b${key}\\b`, 'gi');
-    output = output.replace(regex, wordMap[key]);
-  });
-
-  return output;
+   return text
+    .split(" ")
+    .map(word => wordMap[word.toLowerCase()] || word)
+    .join(" ");
 }
 
-// Example usage
-const inputText = "hello my friend, amazing grandma loves delicious ice cream and dancing in creepy rooms.";
-console.log(brainrotTranslate(inputText));
+document.getElementById("translateButton").addEventListener("click", () => {
+  const inputText = document.getElementById("inputText").value;
+  const outputText = brainrotTranslate(inputText);
+  document.getElementById("outputText").value = outputText;
+});
