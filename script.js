@@ -87,6 +87,9 @@ function brainrotTranslate(text) {
     "jamian": "Williams kitten",
     "Masturbating for a long period of time": "Gooning",
     "Abusing ones self until you are about to ejaculate but before you ejaculate you halt to maintain the dopamine inside your body": "gooning",
+    "bro": "bruzz",
+    "golf": "ts ass",
+    "Henry": "Golf bruzz",
    
   };
 
