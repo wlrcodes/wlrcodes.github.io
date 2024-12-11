@@ -56,7 +56,7 @@ button:hover {
 }
 
 ul#permanentSuggestions {
-  display: none; /* Hide the permanent list unless explicitly styled elsewhere */
+  display: none;
   list-style-type: none;
   padding: 0;
   margin-top: 20px;
@@ -69,4 +69,26 @@ ul#permanentSuggestions li {
 
 .hidden {
   display: none;
+}
+
+#currentWordsDropdown {
+  background-color: #1a1a2e;
+  color: #ffffff;
+  padding: 10px;
+  border: 1px solid #e94560;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 10px;
+  text-align: left;
+  display: none;
+}
+
+#currentWordsDropdown.visible {
+  display: block;
+}
+
+#currentWordsDropdown p {
+  margin: 5px 0;
+  font-size: 14px;
 }
