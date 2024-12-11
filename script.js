@@ -1,6 +1,5 @@
-function brainrotTranslate(text) {
-  const wordMap = {
-    "hello": "yo",
+const wordMap = {
+  "hello": "yo",
     "goodbye": "peace",
     "friend": "bruzz",
     "bros": "bruzz",
@@ -90,10 +89,10 @@ function brainrotTranslate(text) {
     "bro": "bruzz",
     "golf": "ts ass",
     "Henry": "Golf bruzz",
-   
-  };
+};
 
-   return text
+function brainrotTranslate(text) {
+  return text
     .split(" ")
     .map(word => wordMap[word.toLowerCase()] || word)
     .join(" ");
@@ -104,3 +103,39 @@ document.getElementById("translateButton").addEventListener("click", () => {
   const outputText = brainrotTranslate(inputText);
   document.getElementById("outputText").value = outputText;
 });
+
+document.getElementById("wordListLink").addEventListener("click", () => {
+  const wordList = document.getElementById("wordList");
+  const wordListContent = document.getElementById("wordListContent");
+  wordListContent.innerHTML = Object.entries(wordMap)
+    .map(([word, translation]) => `<li>${word}: ${translation}</li>`)
+    .join("");
+  wordList.classList.remove("hidden");
+});
+
+document.getElementById("closeWordList").addEventListener("click", () => {
+  document.getElementById("wordList").classList.add("hidden");
+});
+
+document.getElementById("suggestButton").addEventListener("click", () => {
+  document.getElementById("suggestionBox").classList.remove("hidden");
+});
+
+document.getElementById("closeSuggestionBox").addEventListener("click", () => {
+  document.getElementById("suggestionBox").classList.add("hidden");
+});
+
+document.getElementById("submitSuggestion").addEventListener("click", () => {
+  const suggestWord = document.getElementById("suggestWord").value;
+  const suggestTranslation = document.getElementById("suggestTranslation").value;
+  if (suggestWord && suggestTranslation) {
+    alert(`Suggestion submitted: ${suggestWord} => ${suggestTranslation}`);
+    document.getElementById("suggestWord").value = "";
+    document.getElementById("suggestTranslation").value = "";
+    document.getElementById("suggestionBox").classList.add("hidden");
+  } else {
+    alert("Please fill out both fields before submitting.");
+  }
+});
+
+    
