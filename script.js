@@ -1,6 +1,5 @@
 const wordMap = {
-    
-"hello": "yo",
+    "hello": "yo",
     "goodbye": "peace",
     "friend": "bruzz",
     "bros": "bruzz",
@@ -89,24 +88,25 @@ const wordMap = {
     "Abusing ones self until you are about to ejaculate but before you ejaculate you halt to maintain the dopamine inside your body": "gooning",
     "bro": "bruzz",
     "golf": "ts ass",
-    "Henry": "Golf bruzz",
-};
-
 
 
 };
 
-// Function to render suggestions in permanent list
-function renderSuggestions() {
-  const suggestions = JSON.parse(localStorage.getItem("suggestions")) || [];
-  const permanentList = document.getElementById("permanentSuggestions");
-  permanentList.innerHTML = ""; // Clear current list
-  suggestions.forEach(({ word, translation }) => {
-    permanentList.innerHTML += `<li>${word} > ${translation}</li>`;
-  });
+function brainrotTranslate(text) {
+  return text
+    .split(" ")
+    .map((word) => wordMap[word.toLowerCase()] || word)
+    .join(" ");
 }
 
-// Function to open the suggestion input window
+// Translate input text when clicking "Translate"
+document.getElementById("translateButton").addEventListener("click", () => {
+  const inputText = document.getElementById("inputText").value;
+  const outputText = brainrotTranslate(inputText);
+  document.getElementById("outputText").value = outputText;
+});
+
+// Open suggestion input window
 document.getElementById("suggestButton").addEventListener("click", () => {
   const suggestionWindow = window.open(
     "",
@@ -179,7 +179,7 @@ document.getElementById("suggestButton").addEventListener("click", () => {
   `);
 });
 
-// Function to open the "View Submitted Suggestions" window
+// Open "View Submitted Suggestions" window
 document.getElementById("viewSuggestionsButton").addEventListener("click", () => {
   const viewWindow = window.open(
     "",
@@ -230,7 +230,7 @@ document.getElementById("viewSuggestionsButton").addEventListener("click", () =>
     <body>
       <h1>Submitted Suggestions</h1>
       <ul>
-        ${suggestions.map(s => `<li>${s.word} > ${s.translation}</li>`).join("")}
+        ${suggestions.map((s) => `<li>${s.word} > ${s.translation}</li>`).join("")}
       </ul>
       <button onclick="window.close()">Close</button>
     </body>
@@ -238,5 +238,13 @@ document.getElementById("viewSuggestionsButton").addEventListener("click", () =>
   `);
 });
 
-// Render suggestions on page load
+// Render suggestions to update the permanent suggestions list
+function renderSuggestions() {
+  const suggestions = JSON.parse(localStorage.getItem("suggestions")) || [];
+  const permanentList = document.getElementById("permanentSuggestions");
+  if (permanentList) permanentList.innerHTML = ""; // Clear the list
+}
+
+// Initial rendering of suggestions
 renderSuggestions();
+
