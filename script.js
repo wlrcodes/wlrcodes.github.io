@@ -10,7 +10,7 @@ const wordMap = {
     "great": "lit",
     "amazing": "fire",
     "style": "drip",
-    "cool": "chill",
+    "cool": "sigma",
     "family": "fam",
     "funny": "lol",
     "excited": "hyped",
@@ -81,14 +81,19 @@ const wordMap = {
     "mags": "swag mags",
     "karnati": "K",
     "shayaan": "Shybaby",
-    "Katherine": "Shayaans slave",
-    "Saxson": "retard",
+    "katherine": "Shayaans slave",
+    "saxson": "retard",
     "jamian": "Williams kitten",
-    "Masturbating for a long period of time": "Gooning",
-    "Abusing ones self until you are about to ejaculate but before you ejaculate you halt to maintain the dopamine inside your body": "gooning",
+    "masturbating for a long period of time": "Gooning",
+    "abusing ones self until you are about to ejaculate but before you ejaculate you halt to maintain the dopamine inside your body": "gooning",
     "bro": "bruzz",
     "golf": "ts ass",
-
+    "talk": "yap",
+    "cute": "skibidi",
+    "lame": "beta",
+    
+    
+    
 
 };
 
