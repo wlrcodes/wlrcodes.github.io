@@ -1,5 +1,7 @@
 const wordMap = {
-  "hello": "yo",
+  
+
+"hello": "yo",
     "goodbye": "peace",
     "friend": "bruzz",
     "bros": "bruzz",
@@ -90,7 +92,6 @@ const wordMap = {
     "golf": "ts ass",
     "Henry": "Golf bruzz",
 
-    
 
 };
 
@@ -107,12 +108,12 @@ document.getElementById("translateButton").addEventListener("click", () => {
   document.getElementById("outputText").value = outputText;
 });
 
-// Open a new window when the user clicks the "Suggestions" button
 document.getElementById("suggestButton").addEventListener("click", () => {
+  // Open a new window for suggestions
   const suggestionWindow = window.open(
     "",
     "SuggestionWindow",
-    "width=400,height=300,resizable,scrollbars"
+    "width=400,height=400,resizable,scrollbars"
   );
 
   suggestionWindow.document.write(`
@@ -138,6 +139,9 @@ document.getElementById("suggestButton").addEventListener("click", () => {
           border-radius: 5px;
           border: none;
         }
+        input {
+          width: 80%;
+        }
         button {
           background-color: #e94560;
           color: white;
@@ -161,8 +165,9 @@ document.getElementById("suggestButton").addEventListener("click", () => {
           const suggestWord = document.getElementById("suggestWord").value;
           const suggestTranslation = document.getElementById("suggestTranslation").value;
           if (suggestWord && suggestTranslation) {
+            // Send data to parent window
             window.opener.document.getElementById("submittedSuggestions").innerHTML += 
-              '<li>' + suggestWord + ': ' + suggestTranslation + '</li>';
+              '<li>' + suggestWord + ' > ' + suggestTranslation + '</li>';
             alert('Suggestion submitted successfully!');
             window.close();
           } else {
@@ -174,5 +179,7 @@ document.getElementById("suggestButton").addEventListener("click", () => {
     </html>
   `);
 });
+
+
 
 
