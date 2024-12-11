@@ -26,7 +26,7 @@ h1 {
   margin-bottom: 10px;
 }
 
-textarea {
+textarea, input {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -35,7 +35,7 @@ textarea {
   margin-bottom: 15px;
 }
 
-textarea:focus {
+textarea:focus, input:focus {
   outline: none;
   box-shadow: 0 0 5px #e94560;
 }
@@ -54,7 +54,21 @@ button:hover {
   background-color: #d83450;
 }
 
-footer {
-  margin-top: 20px;
-  font-size: 0.9em;
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #282a36;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
+}
+
+.hidden {
+  display: none;
 }
