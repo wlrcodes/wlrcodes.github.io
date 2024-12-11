@@ -70,6 +70,11 @@ function brainrotTranslate(text) {
     "internet": "wifi haven",
     "victory": "dub",
     "failure": "L",
+    "chopped": "chuzz",
+    "freshman": "fruzz",
+    "young": "yuzz",
+    "mom": "muzz",
+    "dad": "duzz",
   };
 
   return text
