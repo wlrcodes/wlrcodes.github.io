@@ -89,6 +89,9 @@ const wordMap = {
     "bro": "bruzz",
     "golf": "ts ass",
     "Henry": "Golf bruzz",
+
+    
+
 };
 
 function brainrotTranslate(text) {
@@ -104,38 +107,72 @@ document.getElementById("translateButton").addEventListener("click", () => {
   document.getElementById("outputText").value = outputText;
 });
 
-document.getElementById("wordListLink").addEventListener("click", () => {
-  const wordList = document.getElementById("wordList");
-  const wordListContent = document.getElementById("wordListContent");
-  wordListContent.innerHTML = Object.entries(wordMap)
-    .map(([word, translation]) => `<li>${word}: ${translation}</li>`)
-    .join("");
-  wordList.classList.remove("hidden");
-});
-
-document.getElementById("closeWordList").addEventListener("click", () => {
-  document.getElementById("wordList").classList.add("hidden");
-});
-
+// Open a new window when the user clicks the "Suggestions" button
 document.getElementById("suggestButton").addEventListener("click", () => {
-  document.getElementById("suggestionBox").classList.remove("hidden");
+  const suggestionWindow = window.open(
+    "",
+    "SuggestionWindow",
+    "width=400,height=300,resizable,scrollbars"
+  );
+
+  suggestionWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Submit Suggestion</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #282a36;
+          color: #ffffff;
+          margin: 0;
+          padding: 20px;
+          text-align: center;
+        }
+        input, button {
+          margin: 10px 0;
+          padding: 10px;
+          font-size: 16px;
+          border-radius: 5px;
+          border: none;
+        }
+        button {
+          background-color: #e94560;
+          color: white;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #d83450;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>Submit a Suggestion</h1>
+      <label for="suggestWord">Word:</label><br>
+      <input type="text" id="suggestWord" placeholder="Enter a word"><br>
+      <label for="suggestTranslation">Translation:</label><br>
+      <input type="text" id="suggestTranslation" placeholder="Enter a translation"><br>
+      <button id="submitSuggestion">Submit</button>
+      <button onclick="window.close()">Close</button>
+      <script>
+        document.getElementById("submitSuggestion").addEventListener("click", () => {
+          const suggestWord = document.getElementById("suggestWord").value;
+          const suggestTranslation = document.getElementById("suggestTranslation").value;
+          if (suggestWord && suggestTranslation) {
+            window.opener.document.getElementById("submittedSuggestions").innerHTML += 
+              '<li>' + suggestWord + ': ' + suggestTranslation + '</li>';
+            alert('Suggestion submitted successfully!');
+            window.close();
+          } else {
+            alert('Please fill out both fields.');
+          }
+        });
+      </script>
+    </body>
+    </html>
+  `);
 });
 
-document.getElementById("closeSuggestionBox").addEventListener("click", () => {
-  document.getElementById("suggestionBox").classList.add("hidden");
-});
 
-document.getElementById("submitSuggestion").addEventListener("click", () => {
-  const suggestWord = document.getElementById("suggestWord").value;
-  const suggestTranslation = document.getElementById("suggestTranslation").value;
-  if (suggestWord && suggestTranslation) {
-    alert(`Suggestion submitted: ${suggestWord} => ${suggestTranslation}`);
-    document.getElementById("suggestWord").value = "";
-    document.getElementById("suggestTranslation").value = "";
-    document.getElementById("suggestionBox").classList.add("hidden");
-  } else {
-    alert("Please fill out both fields before submitting.");
-  }
-});
-
-    
