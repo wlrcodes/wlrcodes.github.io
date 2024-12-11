@@ -82,7 +82,7 @@ function brainrotTranslate(text) {
     "mags": "swag mags",
     "karnati": "K",
     "shayaan": "Shybaby",
-    "Kate willis": "Shayaans slave",
+    "Katherine": "Shayaans slave",
     "Saxson": "retard",
     "jamian": "Williams kitten",
     "Masturbating for a long period of time": "Gooning",
