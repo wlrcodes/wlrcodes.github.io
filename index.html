@@ -9,11 +9,31 @@
 <body>
   <div class="container">
     <h1>Brainrot Translator</h1>
+
     <p>Enter Normal English:</p>
     <textarea id="inputText" rows="6" placeholder="Type your text here..."></textarea>
     <button id="translateButton">Translate</button>
+
     <p>Brainrot Translation:</p>
     <textarea id="outputText" rows="6" readonly></textarea>
+
+    <p><a href="#" id="wordListLink">WORD LIST</a></p>
+    <div id="wordList" class="modal hidden">
+      <h2>Translated Words</h2>
+      <ul id="wordListContent"></ul>
+      <button id="closeWordList">Close</button>
+    </div>
+
+    <button id="suggestButton">Suggestions</button>
+    <div id="suggestionBox" class="modal hidden">
+      <h2>Suggest a Word</h2>
+      <label for="suggestWord">Word:</label>
+      <input type="text" id="suggestWord" placeholder="Enter a word">
+      <label for="suggestTranslation">Translation:</label>
+      <input type="text" id="suggestTranslation" placeholder="Enter a translation">
+      <button id="submitSuggestion">Submit</button>
+      <button id="closeSuggestionBox">Close</button>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
