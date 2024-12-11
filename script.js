@@ -1,6 +1,5 @@
 const wordMap = {
   
-
 "hello": "yo",
     "goodbye": "peace",
     "friend": "bruzz",
@@ -91,25 +90,20 @@ const wordMap = {
     "bro": "bruzz",
     "golf": "ts ass",
     "Henry": "Golf bruzz",
-
-
 };
 
-function brainrotTranslate(text) {
-  return text
-    .split(" ")
-    .map(word => wordMap[word.toLowerCase()] || word)
-    .join(" ");
+// Function to render suggestions in permanent list
+function renderSuggestions() {
+  const suggestions = JSON.parse(localStorage.getItem("suggestions")) || [];
+  const permanentList = document.getElementById("permanentSuggestions");
+  permanentList.innerHTML = ""; // Clear current list
+  suggestions.forEach(({ word, translation }) => {
+    permanentList.innerHTML += `<li>${word} > ${translation}</li>`;
+  });
 }
 
-document.getElementById("translateButton").addEventListener("click", () => {
-  const inputText = document.getElementById("inputText").value;
-  const outputText = brainrotTranslate(inputText);
-  document.getElementById("outputText").value = outputText;
-});
-
+// Function to open the suggestion input window
 document.getElementById("suggestButton").addEventListener("click", () => {
-  // Open a new window for suggestions
   const suggestionWindow = window.open(
     "",
     "SuggestionWindow",
@@ -165,13 +159,14 @@ document.getElementById("suggestButton").addEventListener("click", () => {
           const suggestWord = document.getElementById("suggestWord").value;
           const suggestTranslation = document.getElementById("suggestTranslation").value;
           if (suggestWord && suggestTranslation) {
-            // Send data to parent window
-            window.opener.document.getElementById("submittedSuggestions").innerHTML += 
-              '<li>' + suggestWord + ' > ' + suggestTranslation + '</li>';
-            alert('Suggestion submitted successfully!');
+            const suggestions = JSON.parse(localStorage.getItem("suggestions")) || [];
+            suggestions.push({ word: suggestWord, translation: suggestTranslation });
+            localStorage.setItem("suggestions", JSON.stringify(suggestions));
+            alert("Suggestion submitted successfully!");
+            window.opener.renderSuggestions();
             window.close();
           } else {
-            alert('Please fill out both fields.');
+            alert("Please fill out both fields.");
           }
         });
       </script>
@@ -180,6 +175,67 @@ document.getElementById("suggestButton").addEventListener("click", () => {
   `);
 });
 
+// Function to open the "View Submitted Suggestions" window
+document.getElementById("viewSuggestionsButton").addEventListener("click", () => {
+  const viewWindow = window.open(
+    "",
+    "ViewSuggestionsWindow",
+    "width=400,height=400,resizable,scrollbars"
+  );
+
+  const suggestions = JSON.parse(localStorage.getItem("suggestions")) || [];
+  viewWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Submitted Suggestions</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #282a36;
+          color: #ffffff;
+          margin: 0;
+          padding: 20px;
+          text-align: center;
+        }
+        ul {
+          list-style-type: none;
+          padding: 0;
+        }
+        li {
+          margin: 5px 0;
+          font-size: 16px;
+        }
+        button {
+          margin-top: 20px;
+          background-color: #e94560;
+          color: white;
+          padding: 10px 20px;
+          font-size: 16px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #d83450;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>Submitted Suggestions</h1>
+      <ul>
+        ${suggestions.map(s => `<li>${s.word} > ${s.translation}</li>`).join("")}
+      </ul>
+      <button onclick="window.close()">Close</button>
+    </body>
+    </html>
+  `);
+});
+
+// Render suggestions on page load
+renderSuggestions();
 
 
 
